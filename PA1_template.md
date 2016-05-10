@@ -32,23 +32,27 @@ activityDataCleaned <- activityData[complete.cases(activityData),]
 # Calculate the total number of steps taken per day
 steps_taken_per_day <- aggregate(steps ~ date, activityDataCleaned, sum)
 ```
-1. Create a histogram of no of steps taken per day
+**1. Create a histogram of no of steps taken per day**
 
 ```r
-hist(steps_taken_per_day$steps, main = "Histogram of total number of steps taken per day", xlab = "Steps taken per day")
+# Just for beautification
+colors = c("red", "yellow", "green", "violet", "orange", "blue", "pink", "cyan") 
+hist(steps_taken_per_day$steps, col=colors, main = "Histogram of total number of steps taken per day", xlab = "Steps taken per day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)
 
-2. Calculate the mean and median of the total number of steps taken per day
+**2. Calculate the mean and median of the total number of steps taken per day**
 
 ```r
+# disabling scientific notation in R
+options(scipen = 999)
 # calculate mean and median values
 steps_taken_per_day_mean <- round(mean(steps_taken_per_day$steps))
 steps_taken_per_day_median <- median(steps_taken_per_day$steps)
 ```
-* Mean is 1.0766\times 10^{4}
-* Median is 10765
+* Mean is **10766**
+* Median is **10765**
 
 
 ## What is the average daily activity pattern?
