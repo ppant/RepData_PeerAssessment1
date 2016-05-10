@@ -1,13 +1,7 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
- 
- 
----
+# Reproducible Research: Peer Assessment 1
 #### Author: Pradeep K. Pant, ppant@cpan.org
-```{r echo=TRUE} 
+
+```r
 # Loading and preprocessing the data
 # Load CRAN modules 
 library(downloader)
@@ -33,23 +27,28 @@ activityData <- read.csv("activity.csv")
 activityDataCleaned <- activityData[complete.cases(activityData),]
 ```
 ## What is mean total number of steps taken per day?
-```{r}
+
+```r
 # Calculate the total number of steps taken per day
 steps_taken_per_day <- aggregate(steps ~ date, activityDataCleaned, sum)
 ```
 1. Create a histogram of no of steps taken per day
-```{r}
+
+```r
 hist(steps_taken_per_day$steps, main = "Histogram of total number of steps taken per day", xlab = "Steps taken per day")
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)
+
 2. Calculate the mean and median of the total number of steps taken per day
-```{r}
+
+```r
 # calculate mean and median values
 steps_taken_per_day_mean <- round(mean(steps_taken_per_day$steps))
 steps_taken_per_day_median <- median(steps_taken_per_day$steps)
 ```
-* Mean is `r steps_taken_per_day_mean`
-* Median is `r steps_taken_per_day_median`
+* Mean is 1.0766\times 10^{4}
+* Median is 10765
 
 
 ## What is the average daily activity pattern?
