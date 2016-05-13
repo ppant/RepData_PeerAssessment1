@@ -169,9 +169,9 @@ Comaring the initial mean and median with the values after filling the dataset w
 First let's make a function to check if day on given date is a weekday or not?
 
 ```r
-week_day <- function(date_val) {
-    wd <- weekdays(as.Date(date_val, '%Y-%m-%d'))
-    if  (!(wd == 'Saturday' || wd == 'Sunday')) {
+week_day <- function(dateVal) {
+    wdname <- weekdays(as.Date(dateVal, '%Y-%m-%d'))
+    if  (!(wdname == 'Saturday' || wdname == 'Sunday')) {
         x <- 'Weekday'
     } else {
         x <- 'Weekend'
@@ -203,4 +203,5 @@ ggplot(steps_per_day_impute, aes(interval, steps)) +
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)
+
 

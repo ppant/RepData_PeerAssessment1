@@ -157,9 +157,9 @@ Comaring the initial mean and median with the values after filling the dataset w
 **1. Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.**
 First let's make a function to check if day on given date is a weekday or not?
 ```{r}
-week_day <- function(date_val) {
-    wd <- weekdays(as.Date(date_val, '%Y-%m-%d'))
-    if  (!(wd == 'Saturday' || wd == 'Sunday')) {
+week_day <- function(dateVal) {
+    wdname <- weekdays(as.Date(dateVal, '%Y-%m-%d'))
+    if  (!(wdname == 'Saturday' || wdname == 'Sunday')) {
         x <- 'Weekday'
     } else {
         x <- 'Weekend'
@@ -187,4 +187,5 @@ ggplot(steps_per_day_impute, aes(interval, steps)) +
     labs(x="Interval", y=expression("No of Steps")) +
     ggtitle("No of steps Per Interval by day type (weekday/weekend)")
 ```
+
 

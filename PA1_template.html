@@ -240,9 +240,9 @@ steps_taken_per_day_median_impute &lt;- round(median(steps_taken_per_day_impute$
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 <p><strong>1. Create a new factor variable in the dataset with two levels - “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</strong> First let’s make a function to check if day on given date is a weekday or not?</p>
-<pre class="r"><code>week_day &lt;- function(date_val) {
-    wd &lt;- weekdays(as.Date(date_val, '%Y-%m-%d'))
-    if  (!(wd == 'Saturday' || wd == 'Sunday')) {
+<pre class="r"><code>week_day &lt;- function(dateVal) {
+    wdname &lt;- weekdays(as.Date(dateVal, '%Y-%m-%d'))
+    if  (!(wdname == 'Saturday' || wdname == 'Sunday')) {
         x &lt;- 'Weekday'
     } else {
         x &lt;- 'Weekend'
