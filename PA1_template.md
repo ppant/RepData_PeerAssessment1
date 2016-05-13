@@ -57,10 +57,32 @@ steps_taken_per_day_median <- median(steps_taken_per_day$steps)
 
 ## What is the average daily activity pattern?
 
+```r
+# Calculate average steps per interval for all days 
+avg_steps_per_interval <- aggregate(steps ~ interval, activityDataCleaned , mean)
+```
 
+**1. Time series plot of the average number of steps taken?**
+
+
+```r
+plot(avg_steps_per_interval$interval, avg_steps_per_interval$steps, type='l', col=1, main="Average number of steps by Interval", xlab="Time Intervals", ylab="Average number of steps")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)
+
+**The 5-minute interval that, on average, contains the maximum number of steps?**
+
+```r
+# Identify the interval index which has the highest average steps
+interval_idx <- which.max(avg_steps_per_interval$steps)
+# Identify the specific interval and the average steps for that interval
+interval_on_max_steps<-avg_steps_per_interval[interval_idx, ]$interval
+maxStepsOnInterval<-round(avg_steps_per_interval[interval_idx, ]$steps, digits = 1)
+# Print max avg interval and max steps
+```
+* Interval in which max steps taken **835**
+* Max steps taken **206.2**
 
 ## Imputing missing values
-
-
-
 ## Are there differences in activity patterns between weekdays and weekends?
