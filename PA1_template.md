@@ -186,7 +186,7 @@ Apply the function to the dataset to create a new day type variable
 # Apply the week_day function and add a new column to activity dataset
 activityData$day_type <- as.factor(sapply(activityData$date, week_day))
 ```
-**2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). **
+**2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).**
 
 
 ```r

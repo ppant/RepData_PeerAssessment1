@@ -252,7 +252,7 @@ steps_taken_per_day_median_impute &lt;- round(median(steps_taken_per_day_impute$
 <p>Apply the function to the dataset to create a new day type variable</p>
 <pre class="r"><code># Apply the week_day function and add a new column to activity dataset
 activityData$day_type &lt;- as.factor(sapply(activityData$date, week_day))</code></pre>
-<p><strong>2. Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). </strong></p>
+<p><strong>2. Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</strong></p>
 <pre class="r"><code># Create the aggregated data frame by intervals and day_type
 steps_per_day_impute &lt;- aggregate(steps ~ interval+day_type, activityData, mean)
 
