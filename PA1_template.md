@@ -71,7 +71,7 @@ plot(avg_steps_per_interval$interval, avg_steps_per_interval$steps, type='l', co
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)
 
-**The 5-minute interval that, on average, contains the maximum number of steps?**
+**2. The 5-minute interval that, on average, contains the maximum number of steps?**
 
 ```r
 # Identify the interval index which has the highest average steps
@@ -85,4 +85,84 @@ maxStepsOnInterval<-round(avg_steps_per_interval[interval_idx, ]$steps, digits =
 * Max steps taken **206.2**
 
 ## Imputing missing values
+**1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)**
+
+```r
+# Calculate the number of rows with missing values
+missing_value_act <- activityData[!complete.cases(activityData), ]
+missing_value_act_count<-nrow(missing_value_act)
+```
+
+* No of missing values **2304**
+
+**2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.  **
+
+```r
+# Strategy is to replace the missing NA values with the average steps in that interval across all the days
+
+# Loop thru all the rows of activity, find the one with NA for steps. 
+# For each identify the interval for that row
+# Then identify the avg steps for that interval in avg_steps_per_interval
+# Substitute the NA value with that value
+
+for (i in 1:nrow(activityData)) {
+    if(is.na(activityData$steps[i])) {
+        val <- avg_steps_per_interval$steps[which(avg_steps_per_interval$interval == activityData$interval[i])]
+        activityData$steps[i] <- val 
+    }
+}
+```
+**3. Create a new dataset that is equal to the original dataset but with the missing data filled in.**
+
+```r
+# Aggregate the steps per day with the imputed values
+steps_taken_per_day_impute <- aggregate(steps ~ date, activityData, sum)
+```
+
+**4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day.**
+
+
+```r
+# Draw a histogram of the value 
+# Just for beautification
+colors = c("orange", "blue", "pink","violet","cyan","red","yellow","green") 
+# create historgram
+hist(steps_taken_per_day_impute$steps, col = colors, main = "Histogram of total number of steps taken per day (IMPUTED)", xlab = "Steps per day")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)
+
+```r
+# disabling scientific notation in R
+options(scipen = 999)
+
+# Compute the mean and median of the imputed value
+steps_taken_per_day_mean_impute <- round(mean(steps_taken_per_day_impute$steps))
+steps_taken_per_day_median_impute <- round(median(steps_taken_per_day_impute$steps))
+```
+
+#### Do these values differ from the estimates from the first part of the assignment? 
+
+Yes, They slighly differ.
+
+Inital values
+
+* Mean is **10766**
+* Median is **10765**
+
+After filling up data
+
+* Mean (IMPUTED) is **10766**
+* Median (IMPUTED) is **10766**
+
+We see that the values after filling the data mean and median are equal.  
+
+
+#### What is the impact of imputing missing data on the estimates of the total daily number of steps?
+Comaring the initial mean and median with the values after filling the dataset we see that mean value remain unchanged but median has shifted slightly. So I don't think it will have major impact on final prediction.
+
+
 ## Are there differences in activity patterns between weekdays and weekends?
+
+
+
