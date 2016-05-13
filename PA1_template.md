@@ -9,6 +9,7 @@ library(plyr)
 library(knitr)
 library(datasets)
 library(ggplot2)
+library(rmarkdown)
 
 # Step 1: Download the activity data set if not avaliable in default location
 Url <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
@@ -164,5 +165,42 @@ Comaring the initial mean and median with the values after filling the dataset w
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+**1. Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.**
+First let's make a function to check if day on given date is a weekday or not?
 
+```r
+week_day <- function(date_val) {
+    wd <- weekdays(as.Date(date_val, '%Y-%m-%d'))
+    if  (!(wd == 'Saturday' || wd == 'Sunday')) {
+        x <- 'Weekday'
+    } else {
+        x <- 'Weekend'
+    }
+    
+}
+```
+Apply the function to the dataset to create a new day type variable
+
+
+```r
+# Apply the week_day function and add a new column to activity dataset
+activityData$day_type <- as.factor(sapply(activityData$date, week_day))
+```
+**2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). **
+
+
+```r
+# Create the aggregated data frame by intervals and day_type
+steps_per_day_impute <- aggregate(steps ~ interval+day_type, activityData, mean)
+
+# Create the plot
+ggplot(steps_per_day_impute, aes(interval, steps)) +
+    geom_line(stat = "identity", aes(colour = day_type)) +
+    theme_bw() +
+    facet_grid(day_type ~ ., scales="fixed", space="fixed") +
+    labs(x="Interval", y=expression("No of Steps")) +
+    ggtitle("No of steps Per Interval by day type (weekday/weekend)")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)
 
