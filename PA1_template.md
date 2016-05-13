@@ -66,7 +66,7 @@ avg_steps_per_interval <- aggregate(steps ~ interval, activityDataCleaned , mean
 
 
 ```r
-plot(avg_steps_per_interval$interval, avg_steps_per_interval$steps, type='l', col=1, main="Average number of steps by Interval", xlab="Time Intervals", ylab="Average number of steps")
+plot(avg_steps_per_interval$interval, avg_steps_per_interval$steps, type='l', col="brown", main="Average number of steps by Interval", xlab="Time Intervals", ylab="Average number of steps")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)
